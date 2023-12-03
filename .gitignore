@@ -1,10 +1,6 @@
 /.DS_Store
-/ApiDemos-debug.apk
 /chromedriver-mobile
-/fromAppiumInspector.mjs
-/index.js
 /node_modules
-/package-lock.json
-/package.json
 /test
 /wdio.conf.js
+/index.js
