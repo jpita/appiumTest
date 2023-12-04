@@ -8,11 +8,13 @@ async function main() {
   const caps = {
     "appium:automationName": "UIAutomator2",
     platformName: "android",
-    "appium:ensureWebviewsHavePages": true,
-    "appium:nativeWebScreenshot": true,
-    "appium:newCommandTimeout": 3600,
-    "appium:connectHardwareKeyboard": true,
-    //Currently Active App ID	 spain.codere.apuestas
+    // "appium:ensureWebviewsHavePages": true,
+    // "appium:nativeWebScreenshot": true,
+    // "appium:newCommandTimeout": 3600,
+    // "appium:connectHardwareKeyboard": true,
+    "appium:app": "Codere_ Apuestas Deportivas_4.4.apk",
+    // "appium:appPackage": "spain.codere.apuestas",
+    // Currently Active App ID	 spain.codere.apuestas
   };
   const driver = await remote({
     protocol: "http",
@@ -22,8 +24,6 @@ async function main() {
     capabilities: caps,
   });
 
-  // await driver.deleteSession();
-
   const loginButton = await driver.$(
     '//android.widget.Button[@text="Acceder"]'
   );
@@ -31,8 +31,17 @@ async function main() {
 
   await driver
     .$('//android.widget.EditText[@hint="Usuario / Correo electrónico"]')
-    .addValue("test");
-  //
+    .addValue("test-bloqueado1234");
+  await driver
+    .$('//android.widget.EditText[@hint="Contraseña"]')
+    .addValue("ejercicioTecnico");
+  await driver.$('//android.widget.Button[@resource-id="btnaccess"]').click();
+  (
+    await driver.$('//android.widget.TextView[@resource-id="alert-hdr-1"]')
+  ).click();
+  await driver.deleteSession();
+  await driver.close;
+  await driver.terminateApp("spain.codere.apuestas");
 }
 
 main().catch(console.log);
